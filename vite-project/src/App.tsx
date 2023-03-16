@@ -3,6 +3,8 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Main from './components/start';
 import AboutUs from './components/about-us';
+import NotFound from './components/not-found';
+import Header from './components/utils/header';
 
 function App() {
   return (
@@ -19,9 +21,11 @@ function App() {
     // </div>
     <div>
       <div>
+        <Header />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </div>
