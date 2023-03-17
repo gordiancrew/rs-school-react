@@ -1,13 +1,14 @@
 import React from 'react';
 import '../../styles/search.css';
-let currentValue = '';
+
 class Search extends React.Component {
+  currentValue = 'iiiii';
   saveValue(e: React.ChangeEvent<HTMLInputElement>) {
-    currentValue = e.target.value;
-    console.log(currentValue);
+    this.currentValue = e.target.value;
+    console.log(this.currentValue);
   }
   componentWillUnmount(): void {
-    localStorage.value = currentValue;
+    localStorage.value = this.currentValue;
     alert('kk');
   }
   render() {
