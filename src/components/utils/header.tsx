@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../styles/header.css';
 class Header extends React.Component {
   render() {
@@ -16,7 +17,7 @@ class Header extends React.Component {
             style={{ backgroundColor: text === item.url ? 'grey' : '' }}
             className="header__item"
           >
-            <a href={item.link}>{item.name}</a>
+            <Link to={item.link}>{item.name}</Link>
           </li>
         ))}
       </div>
