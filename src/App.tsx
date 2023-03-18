@@ -4,13 +4,11 @@ import { Route, Routes } from 'react-router-dom';
 import Main from './components/start';
 import AboutUs from './components/about-us';
 import NotFound from './components/not-found';
-import Header from './components/utils/header';
 
 function App() {
   return (
     <div>
       <div>
-        <Header />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<AboutUs />} />
