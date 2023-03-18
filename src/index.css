@@ -14,9 +14,8 @@
   -webkit-text-size-adjust: 100%;
 }
 
-
-
 body {
+  background-color: red;
   margin: 0;
   display: flex;
   place-items: center;
