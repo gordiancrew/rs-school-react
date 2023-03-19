@@ -13,7 +13,7 @@ class Header extends React.Component {
     const info = menuArr.filter((x) => x.url === text)[0].name;
     return (
       <div className="header">
-        <div className="header-info">Page :{info}</div>
+        <div className="header-info">{info}</div>
         {menuArr.map((item) => (
           <li
             key={item.name}
