@@ -9,7 +9,6 @@ function App() {
   return (
     <div>
       <div>
-        <p>Hello</p>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<AboutUs />} />
