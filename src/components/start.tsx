@@ -8,6 +8,7 @@ class Main extends React.Component {
   render(): React.ReactNode {
     return (
       <div>
+        <h1>Hello</h1>
         <Header />
         <InfoValue />
         <Search />
