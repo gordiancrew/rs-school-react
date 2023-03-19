@@ -32,7 +32,7 @@ export const footballs = [
     photo:
       'https://i2-prod.manchestereveningnews.co.uk/incoming/article26159156.ece/ALTERNATES/s615/1_GettyImages-1462693964.jpg',
     flag: 'https://cdn.britannica.com/44/344-004-494CC2E8/Flag-England.jpg',
-    club: 'Manchester city',
+    club: 'Manchester united',
   },
   {
     name: 'Karim Benzema',

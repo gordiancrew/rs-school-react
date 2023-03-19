@@ -13,7 +13,7 @@ class Search extends React.Component {
     return (
       <div className="search">
         <form>
-          <input placeholder="input" onChange={(e) => this.saveValue(e)} />
+          <input id="inp" type="text" placeholder="input" onChange={(e) => this.saveValue(e)} />
           <button type="button"></button>
         </form>
       </div>

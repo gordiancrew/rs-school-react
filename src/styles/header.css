@@ -8,15 +8,21 @@
   top: 10px;
   left: 2vw;
   right: 2vw;
-  
+}
+.header-info {
+  position: absolute;
+  left: 50px;
+  top: 15px;
+  color: wheat;
+  font-size: 20px;
 }
 li {
   list-style-type: none;
   text-decoration: none;
 }
 a {
-    text-decoration: none;
-    color:white;
+  text-decoration: none;
+  color: white;
 }
 
 .header__item {

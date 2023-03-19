@@ -5,7 +5,7 @@ class AboutUs extends React.Component {
     return (
       <div>
         <Header />
-        <h1>This is class ABOUT US</h1>
+        <h1>This is application about football!</h1>
       </div>
     );
   }
