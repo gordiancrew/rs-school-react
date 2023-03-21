@@ -1,11 +1,14 @@
 import { footballs } from '../../Data/footballs';
 import React from 'react';
 import '../../styles/cards.css';
+import { ICard } from 'types/i-card';
+
 class Cards extends React.Component {
   render() {
+    const footballists: ICard[] = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
     return (
       <div className="cards">
-        {footballs.map((item) => (
+        {footballists.map((item) => (
           <div key={item.name} className="card">
             <div className="card-photo-frame">
               <img className="card-photo" src={item.photo}></img>
