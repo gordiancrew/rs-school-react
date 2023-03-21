@@ -9,11 +9,10 @@ class Header extends React.Component {
     const menuArr = [
       { name: 'main', url: '', link: '/' },
       { name: 'about us', url: 'about', link: '/about' },
+      { name: 'add card', url: 'add', link: '/add' },
     ];
-    const info = menuArr.filter((x) => x.url === text)[0].name;
     return (
       <div className="header">
-        <div className="header-info">{info}</div>
         {menuArr.map((item) => (
           <li
             key={item.name}
