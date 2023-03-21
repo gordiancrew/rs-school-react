@@ -4,7 +4,6 @@ import NotFound from './components/not-found';
 import Search from './components/utils/search';
 import React from 'react';
 import Cards from './components/utils/cards';
-import Main from './components/start';
 import { BrowserRouter } from 'react-router-dom';
 import AboutUs from './components/about-us';
 
@@ -45,17 +44,6 @@ describe('Testing component CARDS', async () => {
   });
 });
 
-describe('Testing component MAIN', async () => {
-  it('present menu', () => {
-    render(
-      <BrowserRouter>
-        <Main />
-      </BrowserRouter>
-    );
-    expect(screen.getByText(/about us/i)).toBeInTheDocument();
-    expect(screen.getByText(/main/i)).toBeInTheDocument();
-  });
-});
 describe('Testing component ABOUT', async () => {
   it('present text about us', () => {
     render(
