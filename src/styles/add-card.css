@@ -1,0 +1,4 @@
+.addcard{
+    display: flex;
+    flex-direction: column;
+}
