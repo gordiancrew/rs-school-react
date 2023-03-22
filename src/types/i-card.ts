@@ -1,6 +1,6 @@
 export interface ICard {
-  name: string;
+  name: string | undefined;
   photo: string;
   flag: string;
-  club: string;
+  club: string | undefined;
 }
