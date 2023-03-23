@@ -13,6 +13,8 @@ class AddCard extends React.Component {
   inputName: React.RefObject<HTMLInputElement>;
   inputClub: React.RefObject<HTMLInputElement>;
   inputFlag: React.RefObject<HTMLSelectElement>;
+  inputDate: React.RefObject<HTMLInputElement>;
+  inputFile: React.RefObject<File | MediaSource>;
   constructor(props: TProps) {
     super(props);
     this.state = { name: '', club: '', flag: '' };
@@ -20,6 +22,8 @@ class AddCard extends React.Component {
     this.inputName = React.createRef();
     this.inputClub = React.createRef();
     this.inputFlag = React.createRef();
+    this.inputFile = React.createRef();
+    this.inputDate = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -32,13 +36,16 @@ class AddCard extends React.Component {
 
     arrCards.push({
       name: this.inputName.current?.value,
-      photo: 'eee',
+      photo: 'ggg',
       flag: this.inputFlag.current?.value,
       club: this.inputClub.current?.value,
+      born: this.inputDate.current?.value,
     });
 
     localStorage.cards = JSON.stringify(arrCards);
-    alert('Отправленное имя: ' + this.inputName.current?.value);
+
+    alert('Отправленн файл: ' + this.inputDate.current?.value);
+    //  this.inputFile.current?.value);
     event.preventDefault();
   }
 
@@ -70,7 +77,13 @@ class AddCard extends React.Component {
             </option>
           </select>
         </label>
-
+        <label>
+          Upload file:
+          <input type="file" accept="image/*" />
+        </label>
+        <label>
+          <input type="date" defaultValue="2017-06-01" ref={this.inputDate}></input>
+        </label>
         <input type="submit" value="Отправить" />
       </form>
     );

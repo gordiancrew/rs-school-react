@@ -16,6 +16,7 @@
   align-items: center;
   cursor: pointer;
 }
+
 .card-photo-frame {
   position: relative;
   width: 180px;
@@ -24,6 +25,13 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
+}
+.card-date{
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  color: aliceblue;
+  text-shadow: 1px 1px black;
 }
 .card-flag {
   display: flex;
