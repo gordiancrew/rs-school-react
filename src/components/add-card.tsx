@@ -15,6 +15,7 @@ class AddCard extends React.Component {
   inputFlag: React.RefObject<HTMLSelectElement>;
   inputDate: React.RefObject<HTMLInputElement>;
   inputFile: React.RefObject<File | MediaSource>;
+  inputCheck: React.RefObject<HTMLInputElement>;
   constructor(props: TProps) {
     super(props);
     this.state = { name: '', club: '', flag: '' };
@@ -24,6 +25,7 @@ class AddCard extends React.Component {
     this.inputFlag = React.createRef();
     this.inputFile = React.createRef();
     this.inputDate = React.createRef();
+    this.inputCheck = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -44,7 +46,7 @@ class AddCard extends React.Component {
 
     localStorage.cards = JSON.stringify(arrCards);
 
-    alert('Отправленн файл: ' + this.inputDate.current?.value);
+    alert('Отправленн файл: ' + this.inputCheck.current?.checked);
     //  this.inputFile.current?.value);
     event.preventDefault();
   }
@@ -53,15 +55,15 @@ class AddCard extends React.Component {
     return (
       <form className="addcard" onSubmit={this.handleSubmit}>
         <label>
-          Имя:
+          Name:
           <input type="text" ref={this.inputName} />
         </label>
         <label>
-          Имя:
+          Club:
           <input type="text" ref={this.inputClub} />
         </label>
         <label>
-          страна:
+          Country:
           <select ref={this.inputFlag}>
             <option value="https://cdn.britannica.com/44/344-004-494CC2E8/Flag-England.jpg">
               England
@@ -83,6 +85,10 @@ class AddCard extends React.Component {
         </label>
         <label>
           <input type="date" defaultValue="2017-06-01" ref={this.inputDate}></input>
+        </label>
+        <label>
+          Are you good man?:
+          <input type="checkbox" ref={this.inputCheck} />
         </label>
         <input type="submit" value="Отправить" />
       </form>
