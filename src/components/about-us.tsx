@@ -1,14 +1,21 @@
-import React from 'react';
-import Header from './utils/header';
-class AboutUs extends React.Component {
-  render() {
-    return (
-      <div>
-        <Header />
-        <h1>This is application about football!</h1>
-      </div>
-    );
-  }
-}
+import React, { useState } from 'react';
 
-export default AboutUs;
+export default function AboutUs() {
+  const [input, setInput] = useState('');
+  function _treat(e: React.ChangeEvent) {
+    const { files }: { files: FileList | null } = e.target as HTMLInputElement;
+    const fileListAsArray = files ? Array.from([...files]) : [];
+
+    if (fileListAsArray) {
+      setInput(URL.createObjectURL(fileListAsArray[0]));
+    }
+  }
+
+  return (
+    <div className="App">
+      <input type="file" accept="image/*" multiple onChange={_treat} />
+
+      <img src={input} />
+    </div>
+  );
+}

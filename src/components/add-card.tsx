@@ -4,7 +4,6 @@ import { ICard } from 'types/i-card';
 import '../styles/add-card.css';
 
 export type TProps = TPropsObj | Readonly<TPropsObj>;
-
 export type TPropsObj = {
   [key: string]: string;
 };
@@ -14,12 +13,11 @@ class AddCard extends React.Component {
   inputClub: React.RefObject<HTMLInputElement>;
   inputFlag: React.RefObject<HTMLSelectElement>;
   inputDate: React.RefObject<HTMLInputElement>;
-  inputFile: React.RefObject<File | MediaSource>;
+  inputFile: React.RefObject<HTMLInputElement>;
   inputCheck: React.RefObject<HTMLInputElement>;
   constructor(props: TProps) {
     super(props);
     this.state = { name: '', club: '', flag: '' };
-
     this.inputName = React.createRef();
     this.inputClub = React.createRef();
     this.inputFlag = React.createRef();
@@ -29,25 +27,34 @@ class AddCard extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // handleChange(event: ChangeEvent) {
-  //   this.setState({ name: (event.target as HTMLInputElement).value });
-  // }
-
+  uploadImage(file: Blob) {
+    const reader = new FileReader();
+    reader.addEventListener('load', function () {
+      if (this.result && localStorage) {
+        localStorage.setItem(file.name, this.result.toString());
+      } else {
+        alert();
+      }
+    });
+    reader.readAsDataURL(file);
+  }
   handleSubmit(event: FormEvent) {
     const arrCards: Array<ICard> = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
 
+    const files: FileList | null | undefined = this.inputFile.current?.files;
+    const fileListAsArray = files ? Array.from([...files]) : [];
+    const objectImg: Blob = fileListAsArray[0];
+    this.uploadImage(objectImg);
     arrCards.push({
       name: this.inputName.current?.value,
-      photo: 'ggg',
+      photo: objectImg.name,
       flag: this.inputFlag.current?.value,
       club: this.inputClub.current?.value,
       born: this.inputDate.current?.value,
     });
-
     localStorage.cards = JSON.stringify(arrCards);
 
-    alert('Отправленн файл: ' + this.inputCheck.current?.checked);
-    //  this.inputFile.current?.value);
+    alert('Отправленн файл: ' + URL.createObjectURL(objectImg));
     event.preventDefault();
   }
 
@@ -81,7 +88,7 @@ class AddCard extends React.Component {
         </label>
         <label>
           Upload file:
-          <input type="file" accept="image/*" />
+          <input type="file" accept="image/*" multiple ref={this.inputFile} />
         </label>
         <label>
           <input type="date" defaultValue="2017-06-01" ref={this.inputDate}></input>
@@ -90,6 +97,7 @@ class AddCard extends React.Component {
           Are you good man?:
           <input type="checkbox" ref={this.inputCheck} />
         </label>
+
         <input type="submit" value="Отправить" />
       </form>
     );
