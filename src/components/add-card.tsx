@@ -45,24 +45,45 @@ class AddCard extends React.Component {
     });
     reader.readAsDataURL(file);
   }
+  anameValid(name: string) {
+    const letters = /^[A-Za-z]+$/;
+    if (name.match(letters) && name[0] === name[0].toUpperCase()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   handleSubmit(event: FormEvent) {
     const arrCards: Array<ICard> = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
 
     const files: FileList | null | undefined = this.inputFile.current?.files;
     const fileListAsArray = files ? Array.from([...files]) : [];
     const objectImg: Blob = fileListAsArray[0];
-    this.uploadImage(objectImg);
-    arrCards.push({
-      name: this.inputName.current?.value + ' ' + this.inputSureName.current?.value,
-      photo: objectImg.name,
-      flag: this.inputFlag.current?.value,
-      club: this.inputClub.current?.value,
-      born: this.inputDate.current?.value,
-    });
-    localStorage.cards = JSON.stringify(arrCards);
 
-    alert('Отправленн файл: ' + this.inputLeg.current?.value);
-    event.preventDefault();
+    const nameValid = this.inputName.current
+      ? this.anameValid(this.inputName.current?.value)
+      : false;
+    const sureNameValid = this.inputSureName.current
+      ? this.anameValid(this.inputSureName.current?.value)
+      : false;
+    if (nameValid && sureNameValid) {
+      this.uploadImage(objectImg);
+      arrCards.push({
+        name: this.inputName.current?.value + ' ' + this.inputSureName.current?.value,
+        photo: objectImg.name,
+        flag: this.inputFlag.current?.value,
+        club: this.inputClub.current?.value,
+        born: this.inputDate.current?.value,
+      });
+      localStorage.cards = JSON.stringify(arrCards);
+
+      alert('New card  created');
+    } else {
+      event.preventDefault();
+      alert(
+        'Name or surename incorrect (the name must contain only English letters and start with a capital letter)'
+      );
+    }
   }
 
   render() {
@@ -73,22 +94,22 @@ class AddCard extends React.Component {
           <fieldset className="fieldset">
             <legend className="legend">Input name:</legend>
 
-            <input type="text" ref={this.inputName} />
+            <input required type="text" ref={this.inputName} />
           </fieldset>
           <fieldset className="fieldset">
             <legend className="legend">Input surename:</legend>
 
-            <input type="text" ref={this.inputSureName} />
+            <input required type="text" ref={this.inputSureName} />
           </fieldset>
           <fieldset className="fieldset">
             <legend className="legend">Input club:</legend>
 
-            <input type="text" ref={this.inputClub} />
+            <input required type="text" ref={this.inputClub} />
           </fieldset>
           <fieldset className="fieldset">
             <legend className="legend">Select country:</legend>
 
-            <select ref={this.inputFlag}>
+            <select required ref={this.inputFlag}>
               <option value="https://cdn.britannica.com/44/344-004-494CC2E8/Flag-England.jpg">
                 England
               </option>
@@ -105,32 +126,32 @@ class AddCard extends React.Component {
           </fieldset>
           <fieldset className="fieldset">
             <legend className="legend">Upload file:</legend>
-
-            <input type="file" accept="image/*" multiple ref={this.inputFile} />
+            <input required type="file" accept="image/*" multiple ref={this.inputFile} />
           </fieldset>
           <fieldset className="fieldset">
             <legend className="legend">Date of born:</legend>
-
-            <input type="date" defaultValue="2017-06-01" ref={this.inputDate}></input>
+            <input required type="date" ref={this.inputDate}></input>
           </fieldset>
           <fieldset className="fieldset">
             <legend className="legend">Are you good man?:</legend>
             <label>
               Yes
-              <input type="checkbox" ref={this.inputCheck} />
+              <input required type="checkbox" ref={this.inputCheck} />
             </label>
           </fieldset>
           <fieldset className="fieldset">
             <legend className="legend">Select leg of player:</legend>
             <div>
+              <label>Right</label>
               <input
+                required
                 type="radio"
                 name="radio"
                 value="1"
                 defaultChecked={false}
                 ref={this.inputLeg}
               />
-
+              <label>Left</label>
               <input
                 type="radio"
                 name="radio"
