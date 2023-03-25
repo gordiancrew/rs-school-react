@@ -11,7 +11,10 @@ class Cards extends React.Component {
         {footballists.map((item) => (
           <div key={item.name} className="card">
             <div className="card-photo-frame">
-              <img className="card-photo" src={localStorage[item.photo]}></img>
+              <img
+                className="card-photo"
+                src={localStorage[item.photo] ? localStorage[item.photo] : item.photo}
+              ></img>
               <div className="card-flag">
                 <img className="card-img" src={item.flag}></img>
               </div>
