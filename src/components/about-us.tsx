@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Header from './utils/header';
 
-export default function AboutUs() {
-  const [input, setInput] = useState('');
-  function _treat(e: React.ChangeEvent) {
-    const { files }: { files: FileList | null } = e.target as HTMLInputElement;
-    const fileListAsArray = files ? Array.from([...files]) : [];
+class AboutUs extends React.Component {
+  render(): React.ReactNode {
+    return (
+      <div>
+        <Header />
 
-    if (fileListAsArray) {
-      setInput(URL.createObjectURL(fileListAsArray[0]));
-    }
+        <h1>This is application about football!</h1>
+      </div>
+    );
   }
-
-  return (
-    <div className="App">
-      <input type="file" accept="image/*" multiple onChange={_treat} />
-
-      <img src={input} />
-    </div>
-  );
 }
+export default AboutUs;
