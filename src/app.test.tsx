@@ -6,6 +6,7 @@ import React from 'react';
 import Cards from './components/utils/cards';
 import { BrowserRouter } from 'react-router-dom';
 import AboutUs from './components/about-us';
+import AddCard from './components/add-card';
 
 describe('Testing PAGE 404', async () => {
   it('present text 404', () => {
@@ -61,5 +62,46 @@ describe('Testing component ABOUT', async () => {
       </BrowserRouter>
     );
     expect(screen.getByRole('heading')).toBeInTheDocument();
+  });
+});
+
+describe('Testing component ADD CARDS', async () => {
+  it('present button submit', () => {
+    render(
+      <BrowserRouter>
+        <AddCard />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText(/Left/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Отправить/i })).toBeVisible();
+  });
+  it('present all field input', () => {
+    render(
+      <BrowserRouter>
+        <AddCard />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText(/Input name:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Input surename:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Input club:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Select country:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Upload file:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Date of born:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Select leg of player:/i)).toBeInTheDocument();
+    expect(screen.getAllByRole('link').length).toBeGreaterThan(0);
+    expect(screen.getByRole('link', { name: 'main' })).toBeInTheDocument();
+  });
+  it('checked links', () => {
+    render(
+      <BrowserRouter>
+        <AddCard />
+      </BrowserRouter>
+    );
+    expect(screen.getAllByRole('link').length).toBeGreaterThan(0);
+    expect(screen.getByRole('link', { name: 'main' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'add card' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'about us' })).toBeInTheDocument();
   });
 });

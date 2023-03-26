@@ -9,7 +9,7 @@ export type TPropsObj = {
   [key: string]: string;
 };
 
-class AddCard extends React.Component {
+class AddCard extends React.Component<TProps, ICard> {
   inputName: React.RefObject<HTMLInputElement>;
   inputSureName: React.RefObject<HTMLInputElement>;
   inputClub: React.RefObject<HTMLInputElement>;
@@ -21,7 +21,7 @@ class AddCard extends React.Component {
 
   constructor(props: TProps) {
     super(props);
-    this.state = { name: '', club: '', flag: '' };
+
     this.inputName = React.createRef();
     this.inputName = React.createRef();
     this.inputSureName = React.createRef();
@@ -31,6 +31,7 @@ class AddCard extends React.Component {
     this.inputDate = React.createRef();
     this.inputCheck = React.createRef();
     this.inputLeg = React.createRef();
+    this.state = { name: '', photo: '', flag: '', club: '', born: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -163,6 +164,7 @@ class AddCard extends React.Component {
           </fieldset>
           <input type="submit" value="Отправить" />
         </form>
+        {/* <h1>{this.state.message}</h1> */}
       </div>
     );
   }
