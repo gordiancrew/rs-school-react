@@ -33,7 +33,7 @@ class AddCard extends React.Component<TProps, ICard> {
     this.inputCheck = React.createRef();
     this.inputLLeg = React.createRef();
     this.inputRLeg = React.createRef();
-    this.state = { name: '', photo: '', flag: '', club: '', born: '', leg: '' };
+    this.state = { name: '', photo: '', flag: '', club: '', born: '', leg: '', check: false };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -43,7 +43,7 @@ class AddCard extends React.Component<TProps, ICard> {
       if (this.result && localStorage) {
         localStorage.setItem(file.name, this.result.toString());
       } else {
-        alert();
+        alert('oops');
       }
     });
     reader.readAsDataURL(file);
@@ -78,6 +78,7 @@ class AddCard extends React.Component<TProps, ICard> {
         club: this.inputClub.current?.value,
         born: this.inputDate.current?.value,
         leg: this.inputLLeg.current?.checked ? this.inputLLeg.current?.value : 'R',
+        check: this.inputCheck.current?.checked,
       });
       localStorage.cards = JSON.stringify(arrCards);
       alert('New card  created');
@@ -87,6 +88,21 @@ class AddCard extends React.Component<TProps, ICard> {
         'Name or surename incorrect (the name must contain only English letters and start with a capital letter)'
       );
     }
+  }
+  view() {
+    const files: FileList | null | undefined = this.inputFile.current?.files;
+    const fileListAsArray = files ? Array.from([...files]) : [];
+    const objectImg: Blob = fileListAsArray[0];
+    const pathImg = URL.createObjectURL(objectImg);
+    this.setState({
+      name: this.inputName.current?.value + ' ' + this.inputSureName.current?.value,
+      club: this.inputClub.current?.value,
+      check: this.inputCheck.current?.checked,
+      photo: pathImg,
+      flag: this.inputFlag.current?.value,
+      born: this.inputDate.current?.value,
+      leg: this.inputLLeg.current?.checked ? this.inputLLeg.current?.value : 'R',
+    });
   }
 
   render() {
@@ -135,38 +151,45 @@ class AddCard extends React.Component<TProps, ICard> {
             <legend className="legend">Date of born:</legend>
             <input required type="date" ref={this.inputDate}></input>
           </fieldset>
-          <fieldset className="fieldset">
-            <legend className="legend">Are you good man?:</legend>
-            <label>
-              Yes
-              <input required type="checkbox" ref={this.inputCheck} />
-            </label>
-          </fieldset>
+
           <fieldset className="fieldset">
             <legend className="legend">Select leg of player:</legend>
             <div>
               <label>Right</label>
-              <input
-                required
-                type="radio"
-                name="radio"
-                value="R"
-                defaultChecked={false}
-                ref={this.inputRLeg}
-              />
+              <input required type="radio" value="R" defaultChecked={false} ref={this.inputRLeg} />
               <label>Left</label>
-              <input
-                type="radio"
-                name="radio"
-                value="L"
-                defaultChecked={false}
-                ref={this.inputLLeg}
-              />
+              <input type="radio" value="L" defaultChecked={false} ref={this.inputLLeg} />
             </div>
           </fieldset>
-          <input type="submit" value="Create" />
+          <fieldset className="fieldset">
+            <legend className="legend">Show current card:</legend>
+            <label>
+              Yes
+              <input onChange={() => this.view()} required type="checkbox" ref={this.inputCheck} />
+            </label>
+          </fieldset>
+
+          <div style={{ display: this.state.check ? 'flex' : 'none' }} className="preview">
+            <div className="card">
+              <div className="card-photo-frame">
+                <img className="card-photo" src={this.state.photo}></img>
+                <div className="card-flag">
+                  <img className="card-img" src={this.state.flag}></img>
+                </div>
+                <div className="card-date">{this.state.born}</div>
+                <div className="foot">{this.state.leg}</div>
+              </div>
+              <div className="card-info">
+                {this.state.name}
+                <React.Fragment>
+                  <br />
+                </React.Fragment>
+                {this.state.club}
+              </div>
+            </div>
+          </div>
+          <input className="btn" type="submit" value="Create" />
         </form>
-        {/* <h1>{this.state.message}</h1> */}
       </div>
     );
   }

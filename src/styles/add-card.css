@@ -10,3 +10,19 @@
 .legend {
   background-color: white;
 }
+.preview {
+  justify-content: center;
+}
+.btn {
+  background-color: rgb(65, 168, 65);
+  height: 30px;
+  margin-top: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+ border: none;
+  
+}
+.btn:hover {
+  background-color: rgb(10, 167, 10);
+ 
+}
