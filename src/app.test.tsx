@@ -74,7 +74,7 @@ describe('Testing component ADD CARDS', async () => {
     );
 
     expect(screen.getByText(/Left/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Отправить/i })).toBeVisible();
+    expect(screen.getByRole('button', { name: /Create/i })).toBeVisible();
   });
   it('present all field input', () => {
     render(

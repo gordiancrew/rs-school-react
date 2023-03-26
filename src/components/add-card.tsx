@@ -17,7 +17,8 @@ class AddCard extends React.Component<TProps, ICard> {
   inputDate: React.RefObject<HTMLInputElement>;
   inputFile: React.RefObject<HTMLInputElement>;
   inputCheck: React.RefObject<HTMLInputElement>;
-  inputLeg: React.RefObject<HTMLInputElement>;
+  inputLLeg: React.RefObject<HTMLInputElement>;
+  inputRLeg: React.RefObject<HTMLInputElement>;
 
   constructor(props: TProps) {
     super(props);
@@ -30,8 +31,9 @@ class AddCard extends React.Component<TProps, ICard> {
     this.inputFile = React.createRef();
     this.inputDate = React.createRef();
     this.inputCheck = React.createRef();
-    this.inputLeg = React.createRef();
-    this.state = { name: '', photo: '', flag: '', club: '', born: '' };
+    this.inputLLeg = React.createRef();
+    this.inputRLeg = React.createRef();
+    this.state = { name: '', photo: '', flag: '', club: '', born: '', leg: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -75,9 +77,9 @@ class AddCard extends React.Component<TProps, ICard> {
         flag: this.inputFlag.current?.value,
         club: this.inputClub.current?.value,
         born: this.inputDate.current?.value,
+        leg: this.inputLLeg.current?.checked ? this.inputLLeg.current?.value : 'R',
       });
       localStorage.cards = JSON.stringify(arrCards);
-
       alert('New card  created');
     } else {
       event.preventDefault();
@@ -148,21 +150,21 @@ class AddCard extends React.Component<TProps, ICard> {
                 required
                 type="radio"
                 name="radio"
-                value="1"
+                value="R"
                 defaultChecked={false}
-                ref={this.inputLeg}
+                ref={this.inputRLeg}
               />
               <label>Left</label>
               <input
                 type="radio"
                 name="radio"
-                value="2"
+                value="L"
                 defaultChecked={false}
-                ref={this.inputLeg}
+                ref={this.inputLLeg}
               />
             </div>
           </fieldset>
-          <input type="submit" value="Отправить" />
+          <input type="submit" value="Create" />
         </form>
         {/* <h1>{this.state.message}</h1> */}
       </div>

@@ -4,4 +4,5 @@ export interface ICard {
   flag: string | undefined;
   club: string | undefined;
   born: string | undefined;
+  leg: string | undefined;
 }

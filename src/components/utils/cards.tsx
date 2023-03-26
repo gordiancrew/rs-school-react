@@ -19,6 +19,7 @@ class Cards extends React.Component {
                 <img className="card-img" src={item.flag}></img>
               </div>
               <div className="card-date">{item.born}</div>
+              <div className="foot">{item.leg ? item.leg : 'R'}</div>
             </div>
             <div className="card-info">
               {item.name}
