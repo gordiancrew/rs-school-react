@@ -3,6 +3,7 @@ import React, { FormEvent } from 'react';
 import { ICard } from 'types/i-card';
 import '../styles/add-card.css';
 import Header from './utils/header';
+import Cards from './utils/cards';
 
 export type TProps = TPropsObj | Readonly<TPropsObj>;
 export type TPropsObj = {
@@ -190,6 +191,7 @@ class AddCard extends React.Component<TProps, ICard> {
           </div>
           <input className="btn" type="submit" value="Create" />
         </form>
+        <Cards />
       </div>
     );
   }
