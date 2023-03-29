@@ -19,10 +19,12 @@
   margin-top: 15px;
   border-radius: 5px;
   cursor: pointer;
- border: none;
-  
+  border: none;
 }
 .btn:hover {
   background-color: rgb(10, 167, 10);
- 
+}
+.error {
+  height: 20;
+  color: red;
 }

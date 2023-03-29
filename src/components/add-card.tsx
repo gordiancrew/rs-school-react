@@ -17,6 +17,10 @@ type FormValues = {
   surename: string;
   club: string;
   flag: string;
+  img: File;
+  date: string;
+  leg: string;
+  check: boolean;
 };
 function AddCard() {
   const {
@@ -25,7 +29,7 @@ function AddCard() {
     handleSubmit,
   } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    alert(JSON.stringify(data));
+    alert(data.img);
   };
 
   return (
@@ -39,9 +43,7 @@ function AddCard() {
               minLength: { value: 2, message: 'min 2 chars' },
             })}
           />
-          <div style={{ height: 20, color: 'red' }}>
-            {errors?.name && <p>{errors?.name?.message || 'error'}:</p>}
-          </div>
+          <div className="error">{errors?.name && <p>{errors?.name?.message || 'error'}:</p>}</div>
         </fieldset>
         <fieldset className="fieldset">
           <legend className="legend">Input name:</legend>
@@ -51,7 +53,7 @@ function AddCard() {
               minLength: { value: 2, message: 'min 2 chars' },
             })}
           />
-          <div style={{ height: 20, color: 'red' }}>
+          <div className="error">
             {errors?.surename && <p>{errors?.surename?.message || 'error'}:</p>}
           </div>
         </fieldset>
@@ -63,9 +65,7 @@ function AddCard() {
               minLength: { value: 2, message: 'min 2 chars' },
             })}
           />
-          <div style={{ height: 20, color: 'red' }}>
-            {errors?.club && <p>{errors?.club?.message || 'error'}:</p>}
-          </div>
+          <div className="error">{errors?.club && <p>{errors?.club?.message || 'error'}:</p>}</div>
         </fieldset>
         <fieldset className="fieldset">
           <legend className="legend">Select country:</legend>
@@ -88,10 +88,63 @@ function AddCard() {
               Portugal
             </option>
           </select>
-          <div style={{ height: 20, color: 'red' }}>
-            {errors?.flag && <p>{errors?.flag?.message || 'error'}:</p>}
+          <div className="error">{errors?.flag && <p>{errors?.flag?.message || 'error'}:</p>}</div>
+        </fieldset>
+        <fieldset className="fieldset">
+          <legend className="legend">Upload file:</legend>
+          <input
+            {...register('img', {
+              required: ' field is required',
+            })}
+            type="file"
+            accept="image/*"
+            multiple
+          />
+          <div className="error">{errors?.img && <p>{errors?.img?.message || 'error'}:</p>}</div>
+        </fieldset>
+        <fieldset className="fieldset">
+          <legend className="legend">Date of born:</legend>
+          <input
+            {...register('date', {
+              required: ' field is required',
+            })}
+            type="date"
+          ></input>
+          <div className="error">{errors?.date && <p>{errors?.date?.message || 'error'}:</p>}</div>
+        </fieldset>
+        <fieldset className="fieldset">
+          <legend className="legend">Select leg of player:</legend>
+          <div>
+            <label>Right</label>
+            <input
+              {...register('leg', {
+                required: ' field is required',
+              })}
+              type="radio"
+              value="R"
+              defaultChecked={false}
+            />
+            <label>Left</label>
+            <input {...register('leg')} type="radio" value="L" defaultChecked={false} />
+          </div>
+          <div className="error">{errors?.leg && <p>{errors?.leg?.message || 'error'}:</p>}</div>
+        </fieldset>
+        <fieldset className="fieldset">
+          <legend className="legend">Show current card:</legend>
+          <label>
+            Yes
+            <input
+              {...register('check', {
+                required: ' field is required',
+              })}
+              type="checkbox"
+            />
+          </label>
+          <div className="error">
+            {errors?.check && <p>{errors?.check?.message || 'error'}:</p>}
           </div>
         </fieldset>
+
         <input type="submit"></input>
       </form>
     </div>
