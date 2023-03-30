@@ -2,8 +2,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
+import { ICard } from '../types/i-card';
 // import { ICard } from 'types/i-card';
 import '../styles/add-card.css';
+import { footballs } from '../Data/footballs';
 // import Header from './utils/header';
 // import Cards from './utils/cards';
 
@@ -17,19 +19,48 @@ type FormValues = {
   surename: string;
   club: string;
   flag: string;
-  img: File;
+  img: FileList;
   date: string;
   leg: string;
   check: boolean;
 };
 function AddCard() {
+  function uploadImage(file: Blob) {
+    const reader = new FileReader();
+    reader.addEventListener('load', function () {
+      if (this.result && localStorage) {
+        localStorage.setItem(file.name, this.result.toString());
+      } else {
+        alert('oops');
+      }
+    });
+    reader.readAsDataURL(file);
+  }
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    alert(data.img);
+    alert(JSON.stringify(data));
+    const arrCards: Array<ICard> = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
+
+    const files = data.img;
+    const fileListAsArray = files ? Array.from([...files]) : [];
+    const objectImg: Blob = fileListAsArray[0];
+
+    uploadImage(objectImg);
+    arrCards.push({
+      name: data.name + ' ' + data.surename,
+      photo: objectImg.name,
+      flag: data.flag,
+      club: data.club,
+      born: data.date,
+      leg: 'R',
+      check: data.check,
+    });
+    localStorage.cards = JSON.stringify(arrCards);
+    alert('New card  created');
   };
 
   return (
@@ -37,14 +68,17 @@ function AddCard() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset className="fieldset">
           <legend className="legend">Input name:</legend>
+
           <input
             {...register('name', {
               required: ' field is required',
               minLength: { value: 2, message: 'min 2 chars' },
             })}
           />
+
           <div className="error">{errors?.name && <p>{errors?.name?.message || 'error'}:</p>}</div>
         </fieldset>
+
         <fieldset className="fieldset">
           <legend className="legend">Input name:</legend>
           <input
