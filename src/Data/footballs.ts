@@ -14,7 +14,7 @@ export const footballs = [
       'https://phantom-marca.unidadeditorial.es/4569c20f4e7d014cf227e6660a72ce86/crop/29x0/726x465/resize/1320/f/jpg/assets/multimedia/imagenes/2022/10/08/16652526665350.jpg',
     flag: 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg',
     club: 'PSG',
-    leg: 'R',
+    leg: 'L',
     born: 'date',
   },
   {

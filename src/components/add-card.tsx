@@ -37,9 +37,9 @@ function AddCard() {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    alert(JSON.stringify(data));
     const arrCards: Array<ICard> = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
     const files = data.img;
     const fileListAsArray = files ? Array.from([...files]) : [];
@@ -56,6 +56,7 @@ function AddCard() {
     });
     localStorage.cards = JSON.stringify(arrCards);
     alert('New card  created');
+    reset();
   };
 
   return (
@@ -69,10 +70,13 @@ function AddCard() {
             {...register('name', {
               required: ' field is required',
               minLength: { value: 2, message: 'min 2 chars' },
+              validate: (value) => value[0] === value[0].toUpperCase(),
             })}
           />
 
-          <div className="error">{errors?.name && <p>{errors?.name?.message || 'error'}:</p>}</div>
+          <div className="error">
+            {errors?.name && <p>{errors?.name?.message || 'First letter must to be capital'}:</p>}
+          </div>
         </fieldset>
 
         <fieldset className="fieldset">
@@ -81,10 +85,13 @@ function AddCard() {
             {...register('surename', {
               required: ' field is required',
               minLength: { value: 2, message: 'min 2 chars' },
+              validate: (value) => value[0] === value[0].toUpperCase(),
             })}
           />
           <div className="error">
-            {errors?.surename && <p>{errors?.surename?.message || 'error'}:</p>}
+            {errors?.surename && (
+              <p>{errors?.surename?.message || 'First letter must to be capital'}:</p>
+            )}
           </div>
         </fieldset>
         <fieldset className="fieldset">
