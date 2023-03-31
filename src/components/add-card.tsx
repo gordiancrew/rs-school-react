@@ -76,7 +76,7 @@ function AddCard() {
         </fieldset>
 
         <fieldset className="fieldset">
-          <legend className="legend">Input name:</legend>
+          <legend className="legend">Input surename:</legend>
           <input
             {...register('surename', {
               required: ' field is required',
