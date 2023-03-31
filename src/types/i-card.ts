@@ -5,5 +5,4 @@ export interface ICard {
   club: string | undefined;
   born: string | undefined;
   leg: string | undefined;
-  check: boolean | undefined;
 }

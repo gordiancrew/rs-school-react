@@ -16,6 +16,7 @@
 .btn {
   background-color: rgb(65, 168, 65);
   height: 30px;
+  width: 100%;
   margin-top: 15px;
   border-radius: 5px;
   cursor: pointer;
