@@ -81,3 +81,18 @@
   background-color: black;
 
 } 
+.card-gender{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  height: 30px;
+  width: 65px;
+  left: 15px;
+  bottom: 10px;
+  background-color: brown;
+  z-index: 10;
+  overflow: hidden;
+  border: 2px solid white;
+  border-radius: 10px;
+  color:white;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
-import Cards from './utils/cards';
+
+import CardsMorti from './utils/cardsMorti';
 import Header from './utils/header';
 
 import Search from './utils/search';
@@ -9,7 +10,7 @@ function Main() {
     <div>
       <Header />
       <Search />
-      <Cards />
+      <CardsMorti />
     </div>
   );
 }

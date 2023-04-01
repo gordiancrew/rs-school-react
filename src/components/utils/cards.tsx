@@ -4,7 +4,8 @@ import '../../styles/cards.css';
 import { ICard } from 'types/i-card';
 
 function Cards() {
-  const footballists: ICard[] = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
+  let footballists: ICard[] = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
+  footballists = footballists.filter((x, i) => i > 9);
 
   return (
     <div className="cards">
