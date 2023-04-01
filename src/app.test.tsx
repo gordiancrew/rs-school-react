@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import NotFound from './components/not-found';
 import Search from './components/utils/search';
@@ -103,5 +103,17 @@ describe('Testing component ADD CARDS', async () => {
     expect(screen.getByRole('link', { name: 'main' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'add card' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'about us' })).toBeInTheDocument();
+  });
+});
+
+describe('Testing FORM HOOKS', () => {
+  it('should display correct error message', async () => {
+    const { getByRole, findByText } = render(
+      <BrowserRouter>
+        <AddCard />
+      </BrowserRouter>
+    );
+    fireEvent.click(getByRole('button', { name: /Create/i }));
+    findByText(/field is required/i);
   });
 });
