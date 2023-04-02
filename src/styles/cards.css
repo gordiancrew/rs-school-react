@@ -96,7 +96,7 @@
   color: white;
 }
 .modal {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   top: 0;
   z-index: 20;
