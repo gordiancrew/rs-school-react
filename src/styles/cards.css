@@ -99,6 +99,8 @@
   position: fixed;
   bottom: 0;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 20;
   width: 100%;
   height: 100%;
@@ -112,7 +114,7 @@
   height: 300px;
   background-color: blueviolet;
 }
-.preview-frame{
+.preview-frame {
   position: relative;
   width: 100px;
   height: 100px;
@@ -122,16 +124,14 @@
   overflow: hidden;
   border-radius: 50px;
   border: 2px solid rgb(213, 117, 6);
-
 }
-.preview-frame:hover{
+.preview-frame:hover {
   border: 2px solid rgb(44, 188, 5);
 }
 .preview-photo {
   height: 100px;
   transition: 0.5s;
   cursor: pointer;
- 
 }
 .preview-photo:hover {
   height: 120px;

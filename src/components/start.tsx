@@ -3,13 +3,14 @@ import React from 'react';
 import CardsMorti from './utils/cardsMorti';
 import Header from './utils/header';
 
-import Search from './utils/search';
+import '../styles/main.css';
+import SearchBar from './utils/searchBar';
 
 function Main() {
   return (
-    <div>
+    <div className="main">
       <Header />
-      <Search />
+      <SearchBar />
       <CardsMorti />
     </div>
   );
