@@ -1,13 +1,23 @@
 import '../../styles/search-bar.css';
 import '../../styles/add-card.css';
 import React from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+type SearchValues = {
+  name: string;
+  gender: string;
+  status: string;
+};
 function SearchBar() {
+  const { register, handleSubmit } = useForm<SearchValues>();
+  const onSubmit: SubmitHandler<SearchValues> = (data) => {
+    alert(JSON.stringify(data));
+  };
   return (
     <div className="search-bar">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset className="fieldset">
           <legend className="legend">Search for name:</legend>
-          <input type="text" placeholder="input" />
+          <input {...register('name')} type="text" placeholder="input" />
         </fieldset>
         <fieldset className="fieldset">
           <legend className="legend">Search gender:</legend>
