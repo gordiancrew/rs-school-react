@@ -3,7 +3,7 @@ import { IMorti, IRes } from '../../types/i-morti';
 import '../../styles/cards.css';
 import MortiInfo from './mortiInfo';
 
-function CardsMorti() {
+function CardsMorti(props: { searchQuery: string }) {
   const [arrMorti, setArrMorti] = useState<IMorti[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -14,7 +14,7 @@ function CardsMorti() {
     setModalObject(content);
   }
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character`)
+    fetch(`https://rickandmortyapi.com/api/character/` + props.searchQuery)
       .then((res) => res.json())
       .then((res: IRes) => res.results)
       .then(
@@ -27,7 +27,7 @@ function CardsMorti() {
           setError(error);
         }
       );
-  }, []);
+  }, [props.searchQuery]);
   if (error) {
     return <div>Error: error</div>;
   } else if (!isLoaded) {

@@ -1,16 +1,20 @@
 import '../../styles/search-bar.css';
 import '../../styles/add-card.css';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 type SearchValues = {
   name: string;
   gender: string;
   status: string;
 };
-function SearchBar() {
+function SearchBar(props: {
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+  searchQuery: string;
+}) {
   const { register, handleSubmit } = useForm<SearchValues>();
   const onSubmit: SubmitHandler<SearchValues> = (data) => {
     alert(JSON.stringify(data));
+    props.setSearchQuery('?name=' + data?.name);
   };
   return (
     <div className="search-bar">
