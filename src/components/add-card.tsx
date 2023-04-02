@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { ICard } from '../types/i-card';
 import '../styles/add-card.css';
-import { footballs } from '../Data/footballs';
+
 import Cards from './utils/cards';
 import Header from './utils/header';
 
@@ -40,7 +40,7 @@ function AddCard() {
     reset,
   } = useForm<FormValues>();
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const arrCards: Array<ICard> = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
+    const arrCards: Array<ICard> = localStorage.cards ? JSON.parse(localStorage.cards) : [];
     const files = data.img;
     const fileListAsArray = files ? Array.from([...files]) : [];
     const objectImg: Blob = fileListAsArray[0];

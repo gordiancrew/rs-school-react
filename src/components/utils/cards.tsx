@@ -1,12 +1,9 @@
-import { footballs } from '../../Data/footballs';
 import React from 'react';
 import '../../styles/cards.css';
 import { ICard } from 'types/i-card';
 
 function Cards() {
-  let footballists: ICard[] = localStorage.cards ? JSON.parse(localStorage.cards) : footballs;
-  footballists = footballists.filter((x, i) => i > 9);
-
+  const footballists: ICard[] = localStorage.cards ? JSON.parse(localStorage.cards) : [];
   return (
     <div className="cards">
       {footballists.map((item) => (

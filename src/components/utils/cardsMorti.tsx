@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { IMorti, IRes } from '../../types/i-morti';
 import '../../styles/cards.css';
-interface IMorti {
-  name: string;
-  image: string;
-  species: string;
-  url: string;
-  gender: string;
-}
-interface IRes {
-  results: IMorti[];
-}
+import MortiInfo from './mortiInfo';
+
 function CardsMorti() {
   const [arrMorti, setArrMorti] = useState<IMorti[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [modalActive, setModalActive] = useState(false);
+  const [modalObject, setModalObject] = useState<IMorti>();
+  function requestModal(content: IMorti) {
+    setModalActive(true);
+    setModalObject(content);
+  }
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character`)
       .then((res) => res.json())
@@ -36,10 +35,17 @@ function CardsMorti() {
   } else {
     return (
       <div className="cards">
+        <div
+          onClick={() => setModalActive(false)}
+          style={{ display: modalActive ? 'flex' : 'none' }}
+          className="modal"
+        >
+          <MortiInfo value={modalObject} />
+        </div>
         {arrMorti.map((item) => (
           <div key={item.name} className="card">
             <div className="card-photo-frame">
-              <img className="card-photo" src={item.image}></img>
+              <img onClick={() => requestModal(item)} className="card-photo" src={item.image}></img>
               <div className="card-gender">
                 {/* <img className="card-img" src={item.url}></img> */}
                 {item.gender}
