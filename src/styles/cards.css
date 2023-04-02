@@ -105,10 +105,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(128, 128, 128, 0.5);
+  background-color: rgb(128, 128, 128, 0.7);
 }
 .modal-content {
   width: 300px;
   height: 300px;
   background-color: blueviolet;
+}
+.preview-frame{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(145, 149, 23);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50px;
+  border: 2px solid rgb(213, 117, 6);
+
+}
+.preview-frame:hover{
+  border: 2px solid rgb(44, 188, 5);
+}
+.preview-photo {
+  height: 100px;
+  transition: 0.5s;
+  cursor: pointer;
+ 
+}
+.preview-photo:hover {
+  height: 120px;
+  transition: 0.5s;
 }

@@ -43,21 +43,12 @@ function CardsMorti() {
           <MortiInfo value={modalObject} />
         </div>
         {arrMorti.map((item) => (
-          <div key={item.name} className="card">
-            <div className="card-photo-frame">
-              <img onClick={() => requestModal(item)} className="card-photo" src={item.image}></img>
-              <div className="card-gender">
-                {/* <img className="card-img" src={item.url}></img> */}
-                {item.gender}
-              </div>
-            </div>
-            <div className="card-info">
-              {item.name}
-              <React.Fragment>
-                <br />
-              </React.Fragment>
-              {item.species}
-            </div>
+          <div key={item.name} className="preview-frame">
+            <img
+              onClick={() => requestModal(item)}
+              className="preview-photo"
+              src={item.image}
+            ></img>
           </div>
         ))}
       </div>
