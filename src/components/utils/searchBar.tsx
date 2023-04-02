@@ -14,7 +14,9 @@ function SearchBar(props: {
   const { register, handleSubmit } = useForm<SearchValues>();
   const onSubmit: SubmitHandler<SearchValues> = (data) => {
     alert(JSON.stringify(data));
-    props.setSearchQuery('?name=' + data?.name);
+    props.setSearchQuery(
+      '?name=' + data?.name + '&status=' + data?.status + '&gender=' + data?.gender
+    );
   };
   return (
     <div className="search-bar">
@@ -24,37 +26,24 @@ function SearchBar(props: {
           <input {...register('name')} type="text" placeholder="input" />
         </fieldset>
         <fieldset className="fieldset">
-          <legend className="legend">Search gender:</legend>
-          <select>
-            <option value="https://cdn.britannica.com/44/344-004-494CC2E8/Flag-England.jpg">
-              England
+          <legend className="legend">Search status:</legend>
+          <select {...register('status')}>
+            <option selected disabled value="">
+              select status
             </option>
-            <option value="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1200px-Flag_of_France.svg.png">
-              France
-            </option>
-            <option value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAMFBMVEWuHCn///8jRYywGyixGySCBhr/9P76/v4lRYkFL2gfR439//0hRY4FMGMfR5AhRJNq9ChhAAABUklEQVR4nO3bu2oDMRBAUXnz2GQT2///t8aFIauLwSaBNOcUgmkGcVGrMQAAAAAAAAAAAAAAAAAAAOCHF2bjldl4YzbemY2V2fhiNg7MNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qTGYV0P1w/pt+ORYX1k+M3W/73R+GTneDyOjZ3T6TS+2Tmfz+ODnWVZxrJty/XN3I5Hhu3O8PSie1v/bNHTW6/GwkyT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNKkLfI4VUnO+x18AAAAASUVORK5CYII=">
-              Nederland
-            </option>
-            <option value="https://flagof.ru/wp-content/uploads/2018/10/portugal-flag-194-p.jpg">
-              Portugal
-            </option>
+            <option value="alive">Alive</option>
+            <option value="dead">Dead</option>
+            <option value="unknow">Unknow</option>
           </select>
         </fieldset>
         <fieldset className="fieldset">
           <legend className="legend">Search gender:</legend>
-          <select>
-            <option value="https://cdn.britannica.com/44/344-004-494CC2E8/Flag-England.jpg">
-              England
+          <select {...register('gender')}>
+            <option selected disabled value="">
+              select gender
             </option>
-            <option value="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1200px-Flag_of_France.svg.png">
-              France
-            </option>
-            <option value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAMFBMVEWuHCn///8jRYywGyixGySCBhr/9P76/v4lRYkFL2gfR439//0hRY4FMGMfR5AhRJNq9ChhAAABUklEQVR4nO3bu2oDMRBAUXnz2GQT2///t8aFIauLwSaBNOcUgmkGcVGrMQAAAAAAAAAAAAAAAAAAAOCHF2bjldl4YzbemY2V2fhiNg7MNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qTGYV0P1w/pt+ORYX1k+M3W/73R+GTneDyOjZ3T6TS+2Tmfz+ODnWVZxrJty/XN3I5Hhu3O8PSie1v/bNHTW6/GwkyT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNKkLfI4VUnO+x18AAAAASUVORK5CYII=">
-              Nederland
-            </option>
-            <option value="https://flagof.ru/wp-content/uploads/2018/10/portugal-flag-194-p.jpg">
-              Portugal
-            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
           </select>
         </fieldset>
 
