@@ -1,0 +1,38 @@
+.header {
+  background-color: brown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  left: 2vw;
+  right: 2vw;
+}
+.header-info {
+  position: absolute;
+  left: 20px;
+  top: 15px;
+  color: rgb(245, 161, 5);
+  font-size: 16px;
+}
+li {
+  list-style-type: none;
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.header__item {
+  padding: 5px;
+  margin: 0 20px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 4px;
+  color: white;
+}
+.header__item:hover {
+  background-color: rgba(99, 73, 3, 0.466);
+}
