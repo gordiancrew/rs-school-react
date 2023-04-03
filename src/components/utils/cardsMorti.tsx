@@ -4,7 +4,7 @@ import '../../styles/cards.css';
 import MortiInfo from './mortiInfo';
 
 function CardsMorti(props: { searchQuery: string }) {
-  const [arrMorti, setArrMorti] = useState<IMorti[]>([]);
+  const [resApi, setResApi] = useState<IRes>();
   const [error, setError] = useState<Error | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [modalActive, setModalActive] = useState(false);
@@ -16,11 +16,10 @@ function CardsMorti(props: { searchQuery: string }) {
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character/` + props.searchQuery)
       .then((res) => res.json())
-      .then((res: IRes) => res.results)
       .then(
-        (result: IMorti[]) => {
+        (result: IRes) => {
           setIsLoaded(true);
-          setArrMorti(result);
+          setResApi(result);
         },
         (error) => {
           setIsLoaded(true);
@@ -31,18 +30,17 @@ function CardsMorti(props: { searchQuery: string }) {
   if (error) {
     return <div>Error: error</div>;
   } else if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <h2>Loading...</h2>;
+  } else if (resApi?.error) {
+    return <h2>No results for these parameters</h2>;
   } else {
     return (
       <div className="cards">
-        <div
-          onClick={() => setModalActive(false)}
-          style={{ display: modalActive ? 'flex' : 'none' }}
-          className="modal"
-        >
-          <MortiInfo value={modalObject} />
+        <div style={{ display: modalActive ? 'flex' : 'none' }} className="modal">
+          <div className="fone" onClick={() => setModalActive(false)}></div>
+          <MortiInfo value={modalObject} setModalActive={setModalActive} />
         </div>
-        {arrMorti.map((item) => (
+        {resApi?.results.map((item) => (
           <div key={item.name} className="preview-frame">
             <img
               onClick={() => requestModal(item)}

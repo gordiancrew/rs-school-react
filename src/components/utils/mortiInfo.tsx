@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { IMorti } from 'types/i-morti';
 import '../../styles/morti-info.css';
 interface IMortiProps {
   value: IMorti | undefined;
+  setModalActive: Dispatch<SetStateAction<boolean>>;
 }
 export default function MortiInfo(props: IMortiProps) {
   return (
     <div className="info-card">
+      <div onClick={() => props.setModalActive(false)} className="btn-close">
+        x
+      </div>
       <div className="info-photo-block">
         <div className="info-photo-frame">
           <img className="info-photo" src={props.value?.image} />
@@ -39,7 +43,6 @@ export default function MortiInfo(props: IMortiProps) {
 
         <div className="info-item">{props.value?.type ? 'TYPE: ' + props.value?.type : ''}</div>
       </div>
-      {/* <h1>{props.value?.name}</h1> */}
     </div>
   );
 }

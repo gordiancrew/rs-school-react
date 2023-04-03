@@ -13,7 +13,6 @@ function SearchBar(props: {
 }) {
   const { register, handleSubmit } = useForm<SearchValues>();
   const onSubmit: SubmitHandler<SearchValues> = (data) => {
-    alert(JSON.stringify(data));
     props.setSearchQuery(
       '?name=' + data?.name + '&status=' + data?.status + '&gender=' + data?.gender
     );
@@ -46,7 +45,6 @@ function SearchBar(props: {
             <option value="female">Female</option>
           </select>
         </fieldset>
-
         <input type="submit" value="search" />
       </form>
     </div>
