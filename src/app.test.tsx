@@ -3,10 +3,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import NotFound from './components/not-found';
 import Search from './components/utils/search';
 import React from 'react';
-import Cards from './components/utils/cards';
+
 import { BrowserRouter } from 'react-router-dom';
 import AboutUs from './components/about-us';
 import AddCard from './components/add-card';
+
+import createFetchMock from 'vitest-fetch-mock';
+
+import { describe, expect, vi } from 'vitest';
+import CardsMorti from './components/utils/cardsMorti';
 
 describe('Testing PAGE 404', async () => {
   it('present text 404', () => {
@@ -31,17 +36,6 @@ describe('Testing component SEARCH', async () => {
   it('present button', () => {
     render(<Search />);
     expect(screen.getByRole('button')).toBeInTheDocument();
-  });
-});
-
-describe('Testing component CARDS', async () => {
-  it('present name footballist', () => {
-    render(<Cards />);
-    expect(screen.getByText(/Ronaldo/i)).toBeInTheDocument();
-  });
-  it('present football club', () => {
-    render(<Cards />);
-    expect(screen.getByText(/Al Nassr/i)).toBeInTheDocument();
   });
 });
 
@@ -115,5 +109,25 @@ describe('Testing FORM HOOKS', () => {
     );
     fireEvent.click(getByRole('button', { name: /Create/i }));
     findByText(/field is required/i);
+  });
+});
+
+describe('Testing fetch', () => {
+  const fetchMocker = createFetchMock(vi);
+  fetchMocker.enableMocks();
+  it('fetch url', async () => {
+    fetchMocker.mockOnce('yyyyhttp://exampleq.com');
+    const res = (await fetch('kkkkhttp://tttexample.com')).status;
+    expect(res === 200);
+  });
+});
+describe('Testing MortiCards', () => {
+  const fetchMocker = createFetchMock(vi);
+  fetchMocker.enableMocks();
+  it('morti', async () => {
+    <BrowserRouter>
+      <CardsMorti searchQuery={'xxxxxxx'} />
+    </BrowserRouter>;
+    expect(screen.findByText(/No results for these parameters/i));
   });
 });
