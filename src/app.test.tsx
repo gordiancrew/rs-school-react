@@ -3,15 +3,14 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import NotFound from './components/not-found';
 import Search from './components/utils/search';
 import React from 'react';
-
 import { BrowserRouter } from 'react-router-dom';
 import AboutUs from './components/about-us';
 import AddCard from './components/add-card';
-
 import createFetchMock from 'vitest-fetch-mock';
-
 import { describe, expect, vi } from 'vitest';
 import CardsMorti from './components/utils/cardsMorti';
+import Cards from './components/utils/cards';
+import MortiInfo from './components/utils/mortiInfo';
 
 describe('Testing PAGE 404', async () => {
   it('present text 404', () => {
@@ -56,6 +55,17 @@ describe('Testing component ABOUT', async () => {
       </BrowserRouter>
     );
     expect(screen.getByRole('heading')).toBeInTheDocument();
+  });
+});
+
+describe('Testing component CARDS', async () => {
+  it('present img', () => {
+    render(
+      <BrowserRouter>
+        <Cards />
+      </BrowserRouter>
+    );
+    expect(screen.getByTestId('preview')).toBeInTheDocument();
   });
 });
 
@@ -116,18 +126,97 @@ describe('Testing fetch', () => {
   const fetchMocker = createFetchMock(vi);
   fetchMocker.enableMocks();
   it('fetch url', async () => {
-    fetchMocker.mockOnce('yyyyhttp://exampleq.com');
-    const res = (await fetch('kkkkhttp://tttexample.com')).status;
+    fetchMocker.mockOnce('https://rickandmortyapi.com/api/character/');
+    const res = (await fetch('https://rickandmortyapi.com/api/character/')).status;
     expect(res === 200);
   });
 });
+
 describe('Testing MortiCards', () => {
   const fetchMocker = createFetchMock(vi);
   fetchMocker.enableMocks();
-  it('morti', async () => {
+  it('card with bad query', async () => {
     <BrowserRouter>
       <CardsMorti searchQuery={'xxxxxxx'} />
     </BrowserRouter>;
-    expect(screen.findByText(/No results for these parameters/i));
+    setTimeout(() => {
+      expect(screen.findByText(/No results for these parameters/i)).toBeInTheDocument();
+    }, 1000);
+  });
+  it('check loading ', () => {
+    render(
+      <BrowserRouter>
+        <CardsMorti searchQuery={''} />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByRole('heading')).toBeInTheDocument();
+    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
+  });
+  it('check mortiCards', async () => {
+    render(
+      <BrowserRouter>
+        <CardsMorti searchQuery={''} />
+      </BrowserRouter>
+    );
+    setTimeout(() => {
+      expect(screen.getByRole('img')).toBeInTheDocument();
+      expect(screen.getByText(/Gender/i)).toBeInTheDocument();
+      expect(screen.getByText(/Species/i)).toBeInTheDocument();
+      expect(screen.getByText(/Status/i)).toBeInTheDocument();
+    }, 1000);
+  });
+  it('mortiCards with query rick', async () => {
+    render(
+      <BrowserRouter>
+        <CardsMorti searchQuery={'rick'} />
+      </BrowserRouter>
+    );
+    setTimeout(() => {
+      expect(screen.getByRole('img')).toBeInTheDocument();
+      expect(screen.getByText(/Rick/i)).toBeInTheDocument();
+    }, 1000);
+  });
+});
+
+describe('Testing MortiInfo', () => {
+  it('check mortiCards', async () => {
+    function func() {
+      return true;
+    }
+
+    render(
+      <BrowserRouter>
+        <MortiInfo
+          value={{
+            name: 'morty',
+            image: 'xxx',
+            species: 'xxx',
+            url: 'xxx',
+            gender: 'xxx',
+            status: 'xxx',
+            type: 'xxx',
+            created: 'xxx',
+            location: { name: 'xxx', url: 'xxx' },
+          }}
+          setModalActive={func}
+        />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByRole('img')).toBeInTheDocument();
+    expect(screen.getByText(/Created/i)).toBeInTheDocument();
+    expect(screen.getByText(/Location/i)).toBeInTheDocument();
+  });
+  it('mortiCards with query rick', async () => {
+    render(
+      <BrowserRouter>
+        <CardsMorti searchQuery={'rick'} />
+      </BrowserRouter>
+    );
+    setTimeout(() => {
+      expect(screen.getByRole('img')).toBeInTheDocument();
+      expect(screen.getByText(/Rick/i)).toBeInTheDocument();
+    }, 1000);
   });
 });

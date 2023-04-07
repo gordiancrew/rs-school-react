@@ -5,7 +5,7 @@ import { ICard } from 'types/i-card';
 function Cards() {
   const footballists: ICard[] = localStorage.cards ? JSON.parse(localStorage.cards) : [];
   return (
-    <div className="cards">
+    <div data-testid={'preview'} className="cards">
       {footballists.map((item) => (
         <div key={item.name} className="card">
           <div className="card-photo-frame">
