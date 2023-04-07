@@ -1,6 +1,6 @@
 import '../../styles/search-bar.css';
 import '../../styles/add-card.css';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 type SearchValues = {
   name: string;
@@ -17,12 +17,25 @@ function SearchBar(props: {
       '?name=' + data?.name + '&status=' + data?.status + '&gender=' + data?.gender
     );
   };
+  const [currentValue, setCurrentValue] = useState<string>(
+    localStorage.value ? localStorage.value : ''
+  );
+
+  useEffect(() => {
+    localStorage.value = currentValue;
+  }, [currentValue]);
   return (
     <div className="search-bar">
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset className="fieldset">
           <legend className="legend">Search for name:</legend>
-          <input {...register('name')} type="text" placeholder="input" />
+          <input
+            defaultValue={localStorage.value}
+            {...register('name')}
+            type="text"
+            placeholder="input"
+            onChange={(e) => setCurrentValue(e.target.value)}
+          />
         </fieldset>
         <fieldset className="fieldset">
           <legend className="legend">Search status:</legend>
