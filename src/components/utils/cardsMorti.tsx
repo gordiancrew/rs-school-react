@@ -14,7 +14,7 @@ function CardsMorti(props: { searchQuery: string }) {
     setModalObject(content);
   }
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/` + props.searchQuery)
+    fetch(`https://rickandmortyapi.com/api/character/?name=` + localStorage.value)
       .then((res) => res.json())
       .then(
         (result: IRes) => {

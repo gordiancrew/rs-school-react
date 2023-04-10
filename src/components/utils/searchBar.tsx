@@ -4,8 +4,6 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 type SearchValues = {
   name: string;
-  gender: string;
-  status: string;
 };
 function SearchBar(props: {
   setSearchQuery: Dispatch<SetStateAction<string>>;
@@ -13,9 +11,8 @@ function SearchBar(props: {
 }) {
   const { register, handleSubmit } = useForm<SearchValues>();
   const onSubmit: SubmitHandler<SearchValues> = (data) => {
-    props.setSearchQuery(
-      '?name=' + data?.name + '&status=' + data?.status + '&gender=' + data?.gender
-    );
+    setCurrentValue(data?.name);
+    props.setSearchQuery('?name=' + currentValue);
   };
   const [currentValue, setCurrentValue] = useState<string>(
     localStorage.value ? localStorage.value : ''
@@ -37,27 +34,7 @@ function SearchBar(props: {
             onChange={(e) => setCurrentValue(e.target.value)}
           />
         </fieldset>
-        <fieldset className="fieldset">
-          <legend className="legend">Search status:</legend>
-          <select {...register('status')}>
-            <option selected disabled value="">
-              select status
-            </option>
-            <option value="alive">Alive</option>
-            <option value="dead">Dead</option>
-            <option value="unknow">Unknow</option>
-          </select>
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="legend">Search gender:</legend>
-          <select {...register('gender')}>
-            <option selected disabled value="">
-              select gender
-            </option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </fieldset>
+
         <input type="submit" value="search" />
       </form>
     </div>
