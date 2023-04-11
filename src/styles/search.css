@@ -1,0 +1,36 @@
+
+.search form {
+  position: relative;
+  width: 300px;
+  margin: 0 auto;
+}
+.search {
+  position: relative;
+  margin-top: 40px;
+}
+.search input {
+  width: 100%;
+  height: 42px;
+  padding-left: 20px;
+  border: 2px solid #7ba7ab;
+  border-radius: 20px;
+  outline: none;
+  background: #f9f0da;
+  color: black;
+  font-size: 16px;
+}
+.search button {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 48px;
+  height: 42px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #f9f0da;
+}
+.search button:before {
+  content: '\1F50E';
+}
+

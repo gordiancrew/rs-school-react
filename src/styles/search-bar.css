@@ -1,0 +1,7 @@
+.search-bar {
+  position: relative;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+ 
+}
