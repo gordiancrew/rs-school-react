@@ -5,5 +5,6 @@ export const store = configureStore({
   reducer: {
     [mortiApi.reducerPath]: mortiApi.reducer,
   },
+
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(mortiApi.middleware),
 });

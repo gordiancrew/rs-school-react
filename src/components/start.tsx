@@ -9,8 +9,7 @@ function Main() {
   return (
     <div className="main">
       <Header />
-      <SearchBar setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
-      <CardsMorti searchQuery={searchQuery} />
+      <CardsMorti />
     </div>
   );
 }
