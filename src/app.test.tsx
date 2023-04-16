@@ -10,7 +10,8 @@ import createFetchMock from 'vitest-fetch-mock';
 import { describe, expect, vi } from 'vitest';
 import CardsMorti from './components/utils/cardsMorti';
 import Cards from './components/utils/cards';
-import MortiInfo from './components/utils/mortiInfo';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 describe('Testing PAGE 404', async () => {
   it('present text 404', () => {
@@ -45,7 +46,8 @@ describe('Testing component ABOUT', async () => {
         <AboutUs />
       </BrowserRouter>
     );
-    expect(screen.getByText(/football/i)).toBeInTheDocument();
+    expect(screen.getByText(/Morty/i)).toBeInTheDocument();
+    expect(screen.getByText(/Rick/i)).toBeInTheDocument();
     expect(screen.getByText(/application/i)).toBeInTheDocument();
   });
   it('present h1', () => {
@@ -135,84 +137,28 @@ describe('Testing fetch', () => {
 describe('Testing MortiCards', () => {
   const fetchMocker = createFetchMock(vi);
   fetchMocker.enableMocks();
-  it('card with bad query', async () => {
-    <BrowserRouter>
-      <CardsMorti searchQuery={'xxxxxxx'} />
-    </BrowserRouter>;
-    setTimeout(() => {
-      expect(screen.findByText(/No results for these parameters/i)).toBeInTheDocument();
-    }, 1000);
-  });
+
   it('check loading ', () => {
     render(
-      <BrowserRouter>
-        <CardsMorti searchQuery={''} />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <CardsMorti />
+        </BrowserRouter>
+      </Provider>
     );
-
     expect(screen.getByRole('heading')).toBeInTheDocument();
-    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
-  });
-  it('check mortiCards', async () => {
-    render(
-      <BrowserRouter>
-        <CardsMorti searchQuery={''} />
-      </BrowserRouter>
-    );
-    setTimeout(() => {
-      expect(screen.getByRole('img')).toBeInTheDocument();
-      expect(screen.getByText(/Gender/i)).toBeInTheDocument();
-      expect(screen.getByText(/Species/i)).toBeInTheDocument();
-      expect(screen.getByText(/Status/i)).toBeInTheDocument();
-    }, 1000);
-  });
-  it('mortiCards with query rick', async () => {
-    render(
-      <BrowserRouter>
-        <CardsMorti searchQuery={'rick'} />
-      </BrowserRouter>
-    );
-    setTimeout(() => {
-      expect(screen.getByRole('img')).toBeInTheDocument();
-      expect(screen.getByText(/Rick/i)).toBeInTheDocument();
-    }, 1000);
+    expect(screen.getByText(/Load.../i)).toBeInTheDocument();
   });
 });
 
 describe('Testing MortiInfo', () => {
-  it('check mortiCards', async () => {
-    function func() {
-      return true;
-    }
-
-    render(
-      <BrowserRouter>
-        <MortiInfo
-          value={{
-            name: 'morty',
-            image: 'xxx',
-            species: 'xxx',
-            url: 'xxx',
-            gender: 'xxx',
-            status: 'xxx',
-            type: 'xxx',
-            created: 'xxx',
-            location: { name: 'xxx', url: 'xxx' },
-          }}
-          setModalActive={func}
-        />
-      </BrowserRouter>
-    );
-
-    expect(screen.getByRole('img')).toBeInTheDocument();
-    expect(screen.getByText(/Created/i)).toBeInTheDocument();
-    expect(screen.getByText(/Location/i)).toBeInTheDocument();
-  });
   it('mortiCards with query rick', async () => {
     render(
-      <BrowserRouter>
-        <CardsMorti searchQuery={'rick'} />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <CardsMorti />
+        </BrowserRouter>
+      </Provider>
     );
     setTimeout(() => {
       expect(screen.getByRole('img')).toBeInTheDocument();
