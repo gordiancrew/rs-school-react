@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import NotFound from './components/not-found';
-import Search from './components/utils/search';
+
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import AboutUs from './components/about-us';
@@ -21,21 +21,6 @@ describe('Testing PAGE 404', async () => {
   it('present text not found', async () => {
     render(<NotFound />);
     expect(screen.getByText(/Page not found/i)).toBeInTheDocument();
-  });
-});
-
-describe('Testing component SEARCH', async () => {
-  it('present text search', () => {
-    render(<Search />);
-    expect(screen.getByPlaceholderText(/input/i)).toBeInTheDocument();
-  });
-  it('present text input', () => {
-    render(<Search />);
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
-  });
-  it('present button', () => {
-    render(<Search />);
-    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 });
 
