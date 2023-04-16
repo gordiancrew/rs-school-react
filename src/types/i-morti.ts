@@ -1,4 +1,5 @@
 export interface IMorti {
+  id: string;
   name: string;
   image: string;
   species: string;

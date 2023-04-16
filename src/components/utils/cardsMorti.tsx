@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { IMorti, IRes } from '../../types/i-morti';
+import React, { useState } from 'react';
+import { IMorti } from '../../types/i-morti';
 import '../../styles/cards.css';
 import '../../styles/search-bar.css';
 import MortiInfo from './mortiInfo';
@@ -65,7 +65,7 @@ function CardsMorti() {
       <div className="cards">
         {!isError
           ? data?.results.map((item) => (
-              <div key={item.name} className="preview-frame">
+              <div key={item.id} className="preview-frame">
                 <img
                   onClick={() => requestModal(item)}
                   className="preview-photo"
