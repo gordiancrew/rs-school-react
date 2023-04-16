@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
-import { ICard } from '../types/i-card';
 import '../styles/add-card.css';
 
-import Cards from './utils/cards';
 import Header from './utils/header';
 
 type FormValues = {
@@ -19,42 +17,13 @@ type FormValues = {
 };
 
 function AddCard() {
-  const [upl, setUpl] = useState(false);
-  function uploadImage(file: Blob) {
-    const reader = new FileReader();
-
-    reader.addEventListener('load', function () {
-      if (this.result && localStorage) {
-        localStorage.setItem(file.name, this.result.toString());
-        setUpl(!upl);
-      } else {
-        alert('oops');
-      }
-    });
-    reader.readAsDataURL(file);
-  }
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const arrCards: Array<ICard> = localStorage.cards ? JSON.parse(localStorage.cards) : [];
-    const files = data.img;
-    const fileListAsArray = files ? Array.from([...files]) : [];
-    const objectImg: Blob = fileListAsArray[0];
-
-    uploadImage(objectImg);
-    arrCards.push({
-      name: data.name + ' ' + data.surename,
-      photo: objectImg.name,
-      flag: data.flag,
-      club: data.club,
-      born: data.date,
-      leg: 'R',
-    });
-    localStorage.cards = JSON.stringify(arrCards);
+  const onSubmit: SubmitHandler<FormValues> = () => {
     alert('New card  created');
     reset();
   };
@@ -184,7 +153,6 @@ function AddCard() {
 
         <input className="btn" type="submit" value="create" />
       </form>
-      <Cards />
     </div>
   );
 }
