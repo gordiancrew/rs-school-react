@@ -48,9 +48,11 @@ describe('Testing component ABOUT', async () => {
 describe('Testing component CARDS', async () => {
   it('present img', () => {
     render(
-      <BrowserRouter>
-        <Cards />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Cards />
+        </BrowserRouter>
+      </Provider>
     );
     expect(screen.getByTestId('preview')).toBeInTheDocument();
   });
@@ -59,9 +61,11 @@ describe('Testing component CARDS', async () => {
 describe('Testing component ADD CARDS', async () => {
   it('present button submit', () => {
     render(
-      <BrowserRouter>
-        <AddCard />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AddCard />
+        </BrowserRouter>
+      </Provider>
     );
 
     expect(screen.getByText(/Left/i)).toBeInTheDocument();
@@ -69,9 +73,11 @@ describe('Testing component ADD CARDS', async () => {
   });
   it('present all field input', () => {
     render(
-      <BrowserRouter>
-        <AddCard />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AddCard />
+        </BrowserRouter>
+      </Provider>
     );
 
     expect(screen.getByText(/Input name:/i)).toBeInTheDocument();
@@ -86,9 +92,11 @@ describe('Testing component ADD CARDS', async () => {
   });
   it('checked links', () => {
     render(
-      <BrowserRouter>
-        <AddCard />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AddCard />
+        </BrowserRouter>
+      </Provider>
     );
     expect(screen.getAllByRole('link').length).toBeGreaterThan(0);
     expect(screen.getByRole('link', { name: 'main' })).toBeInTheDocument();
@@ -100,9 +108,11 @@ describe('Testing component ADD CARDS', async () => {
 describe('Testing FORM HOOKS', () => {
   it('should display correct error message', async () => {
     const { getByRole, findByText } = render(
-      <BrowserRouter>
-        <AddCard />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AddCard />
+        </BrowserRouter>
+      </Provider>
     );
     fireEvent.click(getByRole('button', { name: /Create/i }));
     findByText(/field is required/i);
