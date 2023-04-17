@@ -1,7 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
+import { useDispatch } from 'react-redux';
+import { ICard } from '../types/i-card';
+import { tesstValue } from '../store';
 import '../styles/add-card.css';
+import Cards from './utils/cards';
 
 import Header from './utils/header';
 
@@ -17,13 +21,31 @@ type FormValues = {
 };
 
 function AddCard() {
+  const arrCards: ICard[] = [];
+
+  const dispatch = useDispatch();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm<FormValues>();
-  const onSubmit: SubmitHandler<FormValues> = () => {
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const files = data.img;
+    const fileListAsArray = files ? Array.from([...files]) : [];
+    const objectImg: Blob = fileListAsArray[0];
+    const newCard: ICard = {
+      name: data.name + ' ' + data.surename,
+      photo: objectImg,
+      flag: data.flag,
+      club: data.club,
+      born: data.date,
+      leg: data.leg,
+    };
+    arrCards.push(newCard);
+    dispatch(tesstValue(arrCards));
     alert('New card  created');
     reset();
   };
@@ -153,6 +175,7 @@ function AddCard() {
 
         <input className="btn" type="submit" value="create" />
       </form>
+      <Cards />
     </div>
   );
 }

@@ -6,10 +6,14 @@ import MortiInfo from './mortiInfo';
 import { useSearchUsersQuery } from '../../store/api/morti.api';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { ICard } from '../../types/i-card';
 type SearchValues = {
   name: string;
 };
-interface res {
+export interface res {
+  tesst: {
+    value: ICard[];
+  };
   mortiapi: {
     subscriptions: string;
     mutations: string;

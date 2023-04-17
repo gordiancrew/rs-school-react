@@ -1,9 +1,12 @@
 import React from 'react';
 import '../../styles/cards.css';
-import { ICard } from 'types/i-card';
+import { ICard } from '../../types/i-card';
+import { useSelector } from 'react-redux';
+import { res } from './cardsMorti';
 
 function Cards() {
-  const footballists: ICard[] = localStorage.cards ? JSON.parse(localStorage.cards) : [];
+  const footballists: ICard[] = useSelector((state: res) => state.tesst.value);
+
   return (
     <div data-testid={'preview'} className="cards">
       {footballists.map((item) => (
@@ -11,7 +14,7 @@ function Cards() {
           <div className="card-photo-frame">
             <img
               className="card-photo"
-              src={localStorage[item.photo] ? localStorage[item.photo] : item.photo}
+              src={item.photo ? URL.createObjectURL(item.photo) : 'xxx'}
             ></img>
             <div className="card-flag">
               <img className="card-img" src={item.flag}></img>
