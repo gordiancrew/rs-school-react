@@ -1,0 +1,152 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding: 20px 40px;
+
+}
+.card {
+  width: 200px;
+  height: 250px;
+  background-color: rgb(145, 149, 23);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card-photo-frame {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  background-color: rgb(145, 149, 23);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.card-date {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  color: aliceblue;
+  text-shadow: 1px 1px black;
+}
+.card-flag {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  height: 30px;
+  width: 45px;
+  left: 15px;
+  bottom: 10px;
+  background-color: brown;
+  z-index: 10;
+  overflow: hidden;
+  border: 2px solid white;
+}
+.card-info {
+  padding-top: 10px;
+  text-align: center;
+  width: 180px;
+  height: 40px;
+  background-color: antiquewhite;
+  line-height: 1;
+}
+
+.card-img {
+  height: 30px;
+}
+.card-photo {
+  height: 180px;
+  transition: 0.5s;
+}
+.card-photo:hover {
+  height: 200px;
+  transition: 0.5s;
+}
+.foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+  position: absolute;
+  top: 10px;
+  color: white;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: black;
+}
+.card-gender {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  height: 30px;
+  width: 65px;
+  left: 15px;
+  bottom: 10px;
+  background-color: brown;
+  z-index: 10;
+  overflow: hidden;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+}
+.modal {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+.fone {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 25;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(128, 128, 128, 0.7);
+}
+.modal-content {
+  width: 300px;
+  height: 300px;
+  background-color: blueviolet;
+ 
+}
+.preview-frame {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: rgb(145, 149, 23);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50px;
+  border: 2px solid rgb(213, 117, 6);
+}
+.preview-frame:hover {
+  border: 2px solid rgb(44, 188, 5);
+}
+.preview-photo {
+  height: 100px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.preview-photo:hover {
+  height: 120px;
+  transition: 0.5s;
+}
